@@ -13,7 +13,7 @@ ACCOUNTS = {
         "capital_range": "$100 - $999",
         "fee": "$15/month + 0% performance",
         "myfxbook_url": "https://www.myfxbook.com/portfolio/edgefx-cent-aggressive/11855250",
-        "signal_url": None  # Will be added later
+        "signal_url": None
     },
     "cent_conservative": {
         "id": 11855302,
@@ -33,6 +33,15 @@ class MyfxbookAPI:
         self.email = email
         self.password = password
         self.session = None
+        # Browser headers to avoid 403 errors
+        self.headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'application/json, text/plain, */*',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Connection': 'keep-alive',
+            'Referer': 'https://www.myfxbook.com/'
+        }
     
     def login(self):
         """Login to Myfxbook and get session token"""
@@ -43,7 +52,7 @@ class MyfxbookAPI:
         }
         
         try:
-            response = requests.get(url, params=params)
+            response = requests.get(url, params=params, headers=self.headers, timeout=30)
             response.raise_for_status()
             data = response.json()
             
@@ -67,7 +76,7 @@ class MyfxbookAPI:
         params = {"session": self.session}
         
         try:
-            response = requests.get(url, params=params)
+            response = requests.get(url, params=params, headers=self.headers, timeout=30)
             response.raise_for_status()
             data = response.json()
             
@@ -98,7 +107,7 @@ class MyfxbookAPI:
         }
         
         try:
-            response = requests.get(url, params=params)
+            response = requests.get(url, params=params, headers=self.headers, timeout=30)
             response.raise_for_status()
             data = response.json()
             
@@ -187,7 +196,7 @@ def process_account(api, account_key, account_info):
                 "drawdown": round(float(account_data.get("drawdown", 0)), 2),
                 "win_rate": round(float(account_data.get("profitFactor", 0)) * 100, 1) if account_data.get("profitFactor") else 0
             },
-            "monthly_history": monthly_stats[:12]  # Last 12 months
+            "monthly_history": monthly_stats[:12]
         }
         
         print(f"✅ {account_info['name']}: {result['stats']['total_gain']}% total gain")
