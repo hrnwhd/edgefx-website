@@ -1,0 +1,65 @@
+name: Update Performance Stats
+
+on:
+  schedule:
+    # Runs daily at 12:00 AM Dubai time (GMT+4 = 20:00 UTC previous day)
+    - cron: '0 20 * * *'
+  
+  # Allow manual trigger from GitHub Actions tab
+  workflow_dispatch:
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Fetch Myfxbook data
+        env:
+          MYFXBOOK_EMAIL: ${{ secrets.MYFXBOOK_EMAIL }}
+          MYFXBOOK_PASSWORD: ${{ secrets.MYFXBOOK_PASSWORD }}
+        run: |
+          python update_performance.py
+      
+      - name: Commit and push if changed
+        run: |
+          git config --global user.name 'Edge FX Bot'
+          git config --global user.email 'bot@edgefxcopy.com'
+          git add performance_data.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-update performance stats - $(date +'%Y-%m-%d %H:%M UTC')" && git push)
+```
+
+---
+
+## ✅ **You Now Have All 5 Files:**
+
+1. ✅ **index.html** (from artifact)
+2. ✅ **requirements.txt** (from artifact)
+3. ✅ **update_performance.py** (copy from above ⬆️)
+4. ✅ **performance_data.json** (copy from above ⬆️)
+5. ✅ **update-stats.yml** (copy from above ⬆️)
+
+---
+
+## 📁 **Folder Structure Reminder:**
+```
+your-github-repo/
+├── index.html
+├── requirements.txt
+├── update_performance.py
+├── performance_data.json
+└── .github/
+    └── workflows/
+        └── update-stats.yml
