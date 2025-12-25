@@ -39,27 +39,3 @@ jobs:
           git config --global user.email 'bot@edgefxcopy.com'
           git add performance_data.json
           git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-update performance stats - $(date +'%Y-%m-%d %H:%M UTC')" && git push)
-```
-
----
-
-## ✅ **You Now Have All 5 Files:**
-
-1. ✅ **index.html** (from artifact)
-2. ✅ **requirements.txt** (from artifact)
-3. ✅ **update_performance.py** (copy from above ⬆️)
-4. ✅ **performance_data.json** (copy from above ⬆️)
-5. ✅ **update-stats.yml** (copy from above ⬆️)
-
----
-
-## 📁 **Folder Structure Reminder:**
-```
-your-github-repo/
-├── index.html
-├── requirements.txt
-├── update_performance.py
-├── performance_data.json
-└── .github/
-    └── workflows/
-        └── update-stats.yml
