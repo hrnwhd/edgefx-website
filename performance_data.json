@@ -1,0 +1,55 @@
+{
+  "last_updated": "2024-12-25T20:00:00Z",
+  "accounts": [
+    {
+      "name": "Cent Aggressive",
+      "tier": "Tier 1",
+      "capital_range": "$100 - $999",
+      "fee": "$15/month + 0% performance",
+      "myfxbook_url": "https://www.myfxbook.com/portfolio/edgefx-cent-aggressive/11855250",
+      "signal_url": null,
+      "stats": {
+        "total_gain": 182.5,
+        "min_monthly": 8.2,
+        "avg_monthly": 32.75,
+        "max_monthly": 48.6,
+        "avg_daily": 0.92,
+        "balance": 2825.00,
+        "equity": 2825.00,
+        "drawdown": 12.3,
+        "win_rate": 68.5
+      },
+      "monthly_history": [
+        {"month": "December 2024", "return": 15.2},
+        {"month": "November 2024", "return": 22.1},
+        {"month": "October 2024", "return": 38.4},
+        {"month": "September 2024", "return": 41.2}
+      ]
+    },
+    {
+      "name": "Cent Conservative",
+      "tier": "Tier 2",
+      "capital_range": "$1,000 - $3,000",
+      "fee": "$15/month + 20% performance",
+      "myfxbook_url": "https://www.myfxbook.com/portfolio/edgefx-cent-conservative/11855302",
+      "signal_url": "https://trade.edgefxcopy.com/view/63H6KuV9MVfyOoxI",
+      "stats": {
+        "total_gain": 156.8,
+        "min_monthly": 6.5,
+        "avg_monthly": 24.3,
+        "max_monthly": 35.2,
+        "avg_daily": 0.68,
+        "balance": 2568.00,
+        "equity": 2568.00,
+        "drawdown": 8.7,
+        "win_rate": 72.1
+      },
+      "monthly_history": [
+        {"month": "December 2024", "return": 12.3},
+        {"month": "November 2024", "return": 18.6},
+        {"month": "October 2024", "return": 28.9},
+        {"month": "September 2024", "return": 32.1}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edge FX - Intelligent Trading, Automated Growth</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            background: #1a1a1a;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #4CAF50;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f0f0;
+        }
+
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: -3rem auto 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Performance Section Styles */
+        .performance-accounts {
+            display: grid;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .account-performance {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 2rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .account-performance.tier-1 {
+            border-left-color: #ff6b6b;
+        }
+
+        .account-performance.tier-2 {
+            border-left-color: #4ecdc4;
+        }
+
+        .account-performance.tier-3 {
+            border-left-color: #95e1d3;
+        }
+
+        .account-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .account-title h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .account-info {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .account-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .account-links a {
+            padding: 0.5rem 1rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .account-links a:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .account-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-box .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-box .label {
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .monthly-returns h4 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .monthly-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .month-stat {
+            background: white;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .month-stat .month {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .month-stat .return {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .month-stat .return.positive {
+            color: #4CAF50;
+        }
+
+        .month-stat .return.negative {
+            color: #f44336;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        .last-updated {
+            text-align: center;
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step-card {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 10px;
+            border-top: 3px solid #667eea;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .tier-selection {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .tier-selection h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .tier-option {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #f0f0f0;
+            border-radius: 5px;
+            border-left: 3px solid transparent;
+        }
+
+        .tier-option.tier-1 {
+            border-left-color: #ff6b6b;
+        }
+
+        .tier-option.tier-2 {
+            border-left-color: #4ecdc4;
+        }
+
+        .tier-option.tier-3 {
+            border-left-color: #95e1d3;
+        }
+
+        .tier-option strong {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .tier-option .fee {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .faq-item {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            background: #f0f0f0;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            margin-top: 1rem;
+            display: none;
+            color: #666;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        footer h3 {
+            margin-bottom: 1rem;
+        }
+
+        footer a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin: 0.5rem 0;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        .risk-disclosure {
+            background: #f44336;
+            color: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="home">
+        <div class="container">
+            <a href="#home" style="font-size: 1.5rem; font-weight: bold;">EDGE FX</a>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#performance">Performance</a></li>
+                <li><a href="#how-to-start">How to Start</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>EDGE FX</h1>
+            <p>Intelligent Trading, Automated Growth</p>
+            <p style="font-size: 1.2rem;">Automated Forex Copier for All Capitals</p>
+            <div class="cta-buttons">
+                <a href="https://trade.edgefxcopy.com" class="btn btn-primary">Start Copying Now</a>
+                <a href="#performance" class="btn btn-secondary">View Performance</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="stats-overview" id="overview-stats">
+            <div class="stat-card">
+                <span class="stat-number" id="total-accounts">-</span>
+                <div class="stat-label">Active Strategies</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="best-monthly">-</span>
+                <div class="stat-label">Best Monthly Return</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="avg-monthly">-</span>
+                <div class="stat-label">Avg Monthly Return</div>
+            </div>
+        </div>
+    </div>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Edge FX</h2>
+            <p>Edge FX was born from years of experience navigating the complex world of forex trading. Our mission is simple: provide professional, automated copy trading solutions that work for traders with all capital sizes.</p>
+            
+            <p style="margin-top: 1rem;">We understand the challenges traders face because we've been through them. Our systems are built on proven strategies, combining ICT methodologies with advanced risk management to deliver consistent results.</p>
+            
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Our Journey</h3>
+            <ul style="margin-left: 2rem; line-height: 2;">
+                <li>Started trading in 2016, experiencing the full learning curve including losses and setbacks</li>
+                <li>Explored automated trading, using various systems and identifying common issues and limitations</li>
+                <li>Developed deep understanding of what makes trading systems succeed or fail</li>
+                <li>Built custom automated systems with manual oversight, combining technology with human judgment</li>
+                <li>Now sharing this refined approach with traders worldwide through Edge FX</li>
+            </ul>
+            
+            <p style="margin-top: 1rem;">Today, Edge FX represents the culmination of this journey - sophisticated automated trading systems that you can access through simple copy trading, whether you're starting with $100 or $10,000.</p>
+        </div>
+    </section>
+
+    <section id="performance" style="background: #f5f5f5;">
+        <div class="container">
+            <h2>Live Performance</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">All our trading performance is publicly verified and available in real-time. We believe in complete transparency - you can monitor every trade, every day.</p>
+            
+            <div id="performance-container" class="performance-accounts">
+                <div class="loading">Loading performance data...</div>
+            </div>
+            
+            <div class="last-updated" id="last-updated"></div>
+        </div>
+    </section>
+
+    <section id="how-to-start">
+        <div class="container">
+            <h2>How to Start Copying</h2>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Open Your FBS Account</h3>
+                    <p>Register through our IB link to ensure proper setup for copy trading:</p>
+                    <a href="https://fbs.partners?ibl=545111&ibp=15526614" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Open FBS Account →</a>
+                    
+                    <div class="tier-selection">
+                        <h4>Choose Your Account Type:</h4>
+                        <div class="tier-option tier-1">
+                            <strong>Tier 1: Cent Account - Aggressive</strong>
+                            <div>Capital: $100 - $999</div>
+                            <div class="fee">Fee: $15/month + 0% performance</div>
+                        </div>
+                        <div class="tier-option tier-2">
+                            <strong>Tier 2: Cent Account - Conservative</strong>
+                            <div>Capital: $1,000 - $3,000</div>
+                            <div class="fee">Fee: $15/month + 20% performance</div>
+                        </div>
+                        <div class="tier-option tier-3">
+                            <strong>Tier 3: Standard Account</strong>
+                            <div>Capital: $3,000+</div>
+                            <div class="fee">Fee: $15/month + 20% performance</div>
+                            <div style="color: #ff6b6b; margin-top: 0.5rem; font-size: 0.9rem;">⚠️ Coming March 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Subscribe & Connect</h3>
+                    <p>Visit our copy trading platform and subscribe to your chosen strategy:</p>
+                    <a href="https://trade.edgefxcopy.com" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Subscribe Now →</a>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">Follow the simple setup instructions to connect your FBS account via Social Trader Tools.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Important Rules & Support</h3>
+                    <ul style="margin: 1rem 0; line-height: 1.8;">
+                        <li>Maintain account balance proportional to recommendations</li>
+                        <li>Follow the 10% rule - only trade with risk capital</li>
+                        <li>Do not manually interfere with copied trades</li>
+                        <li>Understand that trading involves risk</li>
+                    </ul>
+                    <p><strong>Need help?</strong></p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+                        📱 Telegram: <a href="https://t.me/edgefx" style="color: #667eea;">@edgefx</a><br>
+                        📧 Email: support@edgefxcopy.com<br>
+                        🕒 Response time: Within 24 hours (GMT+4)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" style="background: #f5f5f5;">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    What is copy trading?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Copy trading allows you to automatically replicate trades from an experienced trader's account to your own account. When we open a trade, your account automatically opens the same trade proportionally. You maintain full control and can stop copying anytime.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    How much do I need to start?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Minimum $100 for Tier 1 (Cent Aggressive). For $1,000-$3,000, we recommend Tier 2 (Cent Conservative). For $3,000+, Tier 3 (Standard Account) will be available in March 2025.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    What are the fees?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Tier 1: $15/month + 0% performance fee<br>
+                    Tier 2: $15/month + 20% performance fee<br>
+                    Tier 3: $15/month + 20% performance fee<br>
+                    No hidden fees - just transparent monthly subscription and performance sharing where applicable.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    What are the risks?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Forex trading involves substantial risk of loss. While we employ sophisticated risk management, losses can and do occur. Never trade with money you cannot afford to lose. Our historical performance does not guarantee future results. Always follow the 50-40-10 rule and only use risk capital.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Can I stop copying anytime?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes, absolutely. You maintain full control of your account. You can pause copying, stop completely, or adjust settings at any time through the Social Trader Tools platform.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="risk-disclosure">
+            <h2 style="margin-bottom: 1rem;">⚠️ Risk Disclosure</h2>
+            <p><strong>Trading Foreign Exchange carries a high level of risk and may not be suitable for all investors.</strong></p>
+            <p style="margin-top: 1rem;">The high degree of leverage can work against you as well as for you. Before deciding to trade foreign exchange, you should carefully consider your investment objectives, level of experience, and risk appetite.</p>
+            <p style="margin-top: 1rem;"><strong>Past performance is not indicative of future results.</strong> Historical returns, expected returns, and probability projections are provided for informational purposes only.</p>
+            <p style="margin-top: 1rem;"><strong>Only trade with money you can afford to lose.</strong> We strongly recommend following the 50-40-10 rule: maintain an emergency fund, invest conservatively, and only allocate a small portion to active trading.</p>
+        </div>
+    </div>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>Edge FX</h3>
+                    <p>Professional forex copy trading for all capitals. Intelligent trading, automated growth.</p>
+                </div>
+                <div>
+                    <h3>Quick Links</h3>
+                    <a href="#home">Home</a>
+                    <a href="#about">About Us</a>
+                    <a href="#performance">Performance</a>
+                    <a href="#how-to-start">How to Start</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+                <div>
+                    <h3>Resources</h3>
+                    <a href="https://trade.edgefxcopy.com">Copy Trading Platform</a>
+                    <a href="https://fbs.partners?ibl=545111&ibp=15526614">Open FBS Account</a>
+                </div>
+                <div>
+                    <h3>Contact</h3>
+                    <p>Email: support@edgefxcopy.com</p>
+                    <p>Telegram: @edgefx</p>
+                    <p>Location: Dubai, UAE</p>
+                    <p>Time Zone: GMT+4</p>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid #333;">
+                © 2024 Edge FX. All rights reserved. | Trading involves risk. Past performance does not guarantee future results.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // Fetch and display performance data
+        async function loadPerformanceData() {
+            try {
+                const response = await fetch('performance_data.json');
+                const data = await response.json();
+                
+                displayPerformanceData(data);
+                updateOverviewStats(data);
+                updateLastUpdated(data.last_updated);
+            } catch (error) {
+                console.error('Error loading performance data:', error);
+                document.getElementById('performance-container').innerHTML = 
+                    '<div class="loading" style="color: #f44336;">Unable to load performance data. Please refresh the page.</div>';
+            }
+        }
+
+        function displayPerformanceData(data) {
+            const container = document.getElementById('performance-container');
+            
+            if (!data.accounts || data.accounts.length === 0) {
+                container.innerHTML = '<div class="loading">No performance data available yet.</div>';
+                return;
+            }
+
+            let html = '';
+            
+            data.accounts.forEach((account, index) => {
+                const tierClass = account.tier.toLowerCase().replace(' ', '-');
+                const signalButton = account.signal_url ? 
+                    `<a href="${account.signal_url}" target="_blank">Copy This Strategy</a>` : 
+                    '<span style="color: #999; font-size: 0.9rem;">Coming Soon</span>';
+                
+                html += `
+                    <div class="account-performance ${tierClass}">
+                        <div class="account-header">
+                            <div class="account-title">
+                                <h3>${account.name}</h3>
+                                <div class="account-info">
+                                    ${account.tier} | ${account.capital_range} | ${account.fee}
+                                </div>
+                            </div>
+                            <div class="account-links">
+                                <a href="${account.myfxbook_url}" target="_blank">View on Myfxbook</a>
+                                ${signalButton}
+                            </div>
+                        </div>
+
+                        <div class="account-stats">
+                            <div class="stat-box">
+                                <div class="number">${account.stats.total_gain}%</div>
+                                <div class="label">Total Gain</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="number">${account.stats.min_monthly}%</div>
+                                <div class="label">Min Monthly</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="number">${account.stats.avg_monthly}%</div>
+                                <div class="label">Avg Monthly</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="number">${account.stats.max_monthly}%</div>
+                                <div class="label">Max Monthly</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="number">${account.stats.avg_daily}%</div>
+                                <div class="label">Avg Daily</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="number">${account.stats.drawdown}%</div>
+                                <div class="label">Drawdown</div>
+                            </div>
+                        </div>
+
+                        ${account.monthly_history && account.monthly_history.length > 0 ? `
+                            <div class="monthly-returns">
+                                <h4>Monthly Performance History</h4>
+                                <div class="monthly-grid">
+                                    ${account.monthly_history.map(month => `
+                                        <div class="month-stat">
+                                            <div class="month">${month.month}</div>
+                                            <div class="return ${month.return >= 0 ? 'positive' : 'negative'}">
+                                                ${month.return >= 0 ? '+' : ''}${month.return}%
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function updateOverviewStats(data) {
+            if (!data.accounts || data.accounts.length === 0) return;
+
+            const totalAccounts = data.accounts.length;
+            const allMonthlyReturns = data.accounts.flatMap(acc => 
+                acc.monthly_history ? acc.monthly_history.map(m => m.return) : []
+            );
+            
+            const bestMonthly = allMonthlyReturns.length > 0 ? 
+                Math.max(...allMonthlyReturns).toFixed(1) : '-';
+            
+            const avgMonthly = allMonthlyReturns.length > 0 ?
+                (allMonthlyReturns.reduce((a, b) => a + b, 0) / allMonthlyReturns.length).toFixed(1) : '-';
+
+            document.getElementById('total-accounts').textContent = totalAccounts;
+            document.getElementById('best-monthly').textContent = bestMonthly !== '-' ? `${bestMonthly}%` : '-';
+            document.getElementById('avg-monthly').textContent = avgMonthly !== '-' ? `${avgMonthly}%` : '-';
+        }
+
+        function updateLastUpdated(timestamp) {
+            const date = new Date(timestamp);
+            const formatted = date.toLocaleString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                timeZone: 'Asia/Dubai'
+            });
+            document.getElementById('last-updated').textContent = 
+                `Last updated: ${formatted} Dubai Time | Data refreshed daily`;
+        }
+
+        // Load performance data on page load
+        loadPerformanceData();
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
